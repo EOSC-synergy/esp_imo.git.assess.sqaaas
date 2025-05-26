@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo:
+      branch: master
+      repo: https://gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo git:
+        commands:
+        - /usr/bin/env sh .sqa/script.tasty-denim-chipmunk.sh
+        container: qc.acc_sloppy-silver-hedgehog
+  QC.Doc:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-burgundy-bat.sh
+        container: qc.doc_clammy-tangerine-camel
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pasty-peach-barb.sh
+        container: qc.doc_shaky-rose-worm
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-orange-eagle.sh
+        container: qc.doc_whiny-chartreuse-jaguar
+  QC.Lic:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-salmon-toucan.sh
+        container: qc.lic_gummy-chestnut-terrier
+  QC.Sec:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.snoopy-corn-newfoundland.sh
+        container: qc.sec_stinky-burgundy-zebra
+  QC.Sty:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-cerise-shrimp.sh
+        container: qc.sty_jumpy-puce-tiger
+  QC.Uni:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-alizarin-toucan.sh
+        container: qc.uni_seedy-cerise-frigatebird
+  QC.Ver:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp_imo get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-rose-uakari.sh
+        container: qc.ver_muggy-malachite-angora
+timeout: 5400
